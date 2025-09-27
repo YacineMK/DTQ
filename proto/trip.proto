@@ -16,9 +16,8 @@ message Coordinate {
     double longitude = 2;
 }
 
-
-message PreviewTripRequest { 
-    string userID = 1;
+message PreviewTripRequest {
+    string packageSlug = 1; 
     Coordinate startLocation = 2;
     Coordinate endLocation = 3;
 }
