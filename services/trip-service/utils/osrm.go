@@ -4,7 +4,7 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 
@@ -13,10 +13,9 @@ import (
 )
 
 var (
-	baseURL = env.GetEnv("OSRM_API_ENDPOINT","http://localhost:5000")
-	profile = "driving"	
+	baseURL = env.GetEnv("OSRM_API_ENDPOINT", "http://localhost:5000")
+	profile = "driving"
 )
-
 
 func GetRoute(coords string) (*types.OsrmApiResponse, error) {
 	endpoint := fmt.Sprintf("%s/route/v1/%s/%s?geometries=geojson", baseURL, profile, url.PathEscape(coords))
@@ -27,7 +26,7 @@ func GetRoute(coords string) (*types.OsrmApiResponse, error) {
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}

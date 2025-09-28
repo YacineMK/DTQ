@@ -23,12 +23,11 @@ message PreviewTripRequest {
 }
 
 message PreviewTripResponse {
-    repeated RideFare rideFares = 1;
+    RideFare rideFares = 1;
 }
 
 
 message RideFare {
-    string id = 1;
     string packageSlug = 2;
     double totalPrice = 3;
     Route route = 4;

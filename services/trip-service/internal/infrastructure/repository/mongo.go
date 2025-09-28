@@ -10,15 +10,15 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type mongoRepository struct {
+type MongoRepository struct {
 	db *mongo.Database
 }
 
-func NewMongoRepository(db *mongo.Database) *mongoRepository {
-	return &mongoRepository{db: db}
+func NewMongoRepository(db *mongo.Database) *MongoRepository {
+	return &MongoRepository{db: db}
 }
 
-func (d *mongoRepository) CreateTrip(ctx context.Context, trip *domain.TripModel) (*domain.TripModel, error) {
+func (d *MongoRepository) CreateTrip(ctx context.Context, trip *domain.TripModel) (*domain.TripModel, error) {
 	result, err := d.db.Collection(db.TripsCollection).InsertOne(ctx, trip)
 	if err != nil {
 		return nil, err
@@ -28,7 +28,7 @@ func (d *mongoRepository) CreateTrip(ctx context.Context, trip *domain.TripModel
 	return trip, nil
 }
 
-func (d *mongoRepository) GetTripByID(ctx context.Context, id string) (*domain.TripModel, error) {
+func (d *MongoRepository) GetTripByID(ctx context.Context, id string) (*domain.TripModel, error) {
 	_id, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return nil, err
@@ -47,7 +47,7 @@ func (d *mongoRepository) GetTripByID(ctx context.Context, id string) (*domain.T
 	return &trip, nil
 }
 
-func (d *mongoRepository) UpdateTrip(ctx context.Context, tripID string, status *domain.TripStatus) error {
+func (d *MongoRepository) UpdateTrip(ctx context.Context, tripID string, status *domain.TripStatus) error {
 	_id, err := primitive.ObjectIDFromHex(tripID)
 	if err != nil {
 		return err
@@ -63,7 +63,7 @@ func (d *mongoRepository) UpdateTrip(ctx context.Context, tripID string, status 
 	return nil
 }
 
-func (d *mongoRepository) SaveRideFare(ctx context.Context, fare *domain.RideFareModel) error {
+func (d *MongoRepository) SaveRideFare(ctx context.Context, fare *domain.RideFareModel) error {
 	result, err := d.db.Collection(db.RideFaresCollection).InsertOne(ctx, fare)
 	if err != nil {
 		return err
