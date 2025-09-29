@@ -75,7 +75,7 @@ func (s *TripService) PreviewTrip(ctx context.Context, req *trippb.PreviewTripRe
 	}, nil
 }
 
-func (s *TripService) CreateTrip(ctx context.Context, req *trippb.CreateTripRequest) (*trippb.Trip, error) {
+func (s *TripService) CreateTrip(ctx context.Context, req *trippb.CreateTripRequest) (*trippb.CreateTripResponse, error) {
 	if req == nil {
 		return nil, fmt.Errorf("request cannot be nil")
 	}
@@ -108,9 +108,11 @@ func (s *TripService) CreateTrip(ctx context.Context, req *trippb.CreateTripRequ
 		return nil, fmt.Errorf("failed to create trip: %w", err)
 	}
 
-	return &trippb.Trip{
-		Id:     trip.ID.Hex(),
-		UserID: userID,
-		Status: string(trip.Status),
+	return &trippb.CreateTripResponse{
+		Trip: &trippb.Trip{
+			Id:     trip.ID.Hex(),
+			UserID: userID,
+			Status: string(trip.Status),
+		},
 	}, nil
 }
