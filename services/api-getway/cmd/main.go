@@ -4,12 +4,11 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/YacineMK/DTQ/services/gateway/internal/grpcclients"
-	"github.com/YacineMK/DTQ/services/gateway/internal/httpapi"
+	"github.com/YacineMK/DTQ/services/api-getway/internal/grpcclients"
+	"github.com/YacineMK/DTQ/services/api-getway/internal/httpapi"
 	"github.com/YacineMK/DTQ/shared/env"
 	"github.com/YacineMK/DTQ/shared/logger"
 	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 )
 
 var (
