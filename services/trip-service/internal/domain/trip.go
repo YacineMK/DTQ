@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	trippb "github.com/YacineMK/DTQ/shared/proto/trip"
 )
 
 type TripStatus string
@@ -33,4 +34,5 @@ type TripRepository interface {
 // service
 type TripService interface {
 	CreateTrip(ctx context.Context, fare *RideFareModel) (*TripModel, error)
+	PreviewTrip(ctx context.Context, req *trippb.PreviewTripRequest) (*trippb.PreviewTripResponse, error)
 }

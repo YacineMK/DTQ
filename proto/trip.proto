@@ -53,5 +53,4 @@ message Trip {
     string id = 1;
     string userID = 2;
     string status = 3;
-    RideFare selectedFare = 4;
 }

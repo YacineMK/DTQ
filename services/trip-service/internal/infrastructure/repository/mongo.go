@@ -72,3 +72,17 @@ func (d *MongoRepository) SaveRideFare(ctx context.Context, fare *domain.RideFar
 	fare.ID = result.InsertedID.(primitive.ObjectID).Hex()
 	return nil
 }
+
+func (d *MongoRepository) GetRideFareByID(ctx context.Context, id string) (*domain.RideFareModel, error) {
+	result := d.db.Collection(db.RideFaresCollection).FindOne(ctx, bson.M{"_id": id})
+	if result.Err() != nil {
+		return nil, result.Err()
+	}
+
+	var fare domain.RideFareModel
+	if err := result.Decode(&fare); err != nil {
+		return nil, err
+	}
+
+	return &fare, nil
+}
