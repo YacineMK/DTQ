@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package driver;
+
+option go_package = "shared/proto/driver;driver";
+
+service DriverService {
+    rpc RegisterDriver(RegisterDriverRequest) returns (RegisterDriverResponse);
+}
+
+
+message RegisterDriverRequest {
+    string name = 1;
+    string email = 2;
+}
+
+message RegisterDriverResponse {
+    string msg = 1;
+}
