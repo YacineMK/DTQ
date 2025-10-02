@@ -4,6 +4,8 @@ import (
 	"context"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	driverpb "github.com/YacineMK/DTQ/shared/proto/driver"
+
 )
 
 type DriverStatus string
@@ -29,7 +31,5 @@ type DriverRepository interface {
 
 // service
 type DriverService interface {
-	FindAndAssignDriver(ctx context.Context) (*DriverModel, error)
-	UpdateDriverStatus(ctx context.Context, driverID string, status DriverStatus) error
-	CreateDriver(ctx context.Context, name string, email string) (*DriverModel, error)
+	CreateDriver(ctx context.Context, req *driverpb.RegisterDriverRequest) (*driverpb.RegisterDriverResponse, error)
 }
