@@ -15,5 +15,3 @@ func RegisterRoutes(mux *http.ServeMux, tripClient *grpcclients.TripService) {
 		handlers.HandleCreateTrip(w, r, tripClient)
 	})
 }
-
-

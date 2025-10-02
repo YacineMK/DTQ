@@ -17,8 +17,9 @@ var (
 )
 
 const (
-	TripsCollection = "trips"
+	TripsCollection     = "trips"
 	RideFaresCollection = "ride_fares"
+	DriversCollection   = "drivers"
 )
 
 type MongoConfig struct {

@@ -3,8 +3,8 @@ package domain
 import (
 	"context"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	trippb "github.com/YacineMK/DTQ/shared/proto/trip"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type TripStatus string

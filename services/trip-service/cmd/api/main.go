@@ -12,35 +12,34 @@ import (
 )
 
 var (
-	tripSrvPort = env.GetEnv("TRIP_SERVICE_PORT",":50051")
+	tripSrvPort = env.GetEnv("TRIP_SERVICE_PORT", ":50051")
 )
 
 func main() {
-	// db 
+	// db
 	cfg := db.NewMongoDefaultConfig()
 
-	client , err := db.NewMongoClient(cfg)
+	client, err := db.NewMongoClient(cfg)
 	if err != nil {
 		panic(err)
 	}
 
-	database := db.GetDatabase(client,cfg)
+	database := db.GetDatabase(client, cfg)
 	repos := repository.NewMongoRepository(database)
 
 	tripService := service.NewTripService(*repos)
 
-
-	lis , err := net.Listen("tcp",tripSrvPort)
+	lis, err := net.Listen("tcp", tripSrvPort)
 	if err != nil {
 		panic(err)
 	}
 
 	grpcServer := grpc.NewServer()
 
-	trippb.RegisterTripServiceServer(grpcServer,tripService)
+	trippb.RegisterTripServiceServer(grpcServer, tripService)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		panic(err)
 	}
-	
+
 }
